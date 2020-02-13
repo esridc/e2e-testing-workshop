@@ -1,33 +1,87 @@
-## Prerequisites
-- Node.JS at least v8.11.2 or higher (I used v8.16.0)
-- JDK (https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+# Testing Google Search Results
 
-## Set up Project
-- `npm init -y` - run in the directory you want your tests to live in
-- `npm i --save-dev @wdio/cli`
-- `./node_modules/.bin/wdio config`
-  - Where should your tests be launched? `local`
-  - Where is your automation backend located? `On my local machine`
-  - Which framework do you want to use? `mocha`
-  - Do you want to run WebdriverIO commands synchronous or asynchronous? `sync`
-  - Where are your test specs located? `Press Enter`
-  - Which reporter do you want to use? `spec`
-  - Do you want to add a service to your test setup? `selenium-standalone` (this will allow us to run tests on multiple browsers instead of just Chrome)
-  - What is the base url? `Press Enter`
-- `mkdir -p ./test/specs`
-- `touch ./test/specs/basic.js`
-
-Insert the following:
+- Same setup from last exercise.
+- Define a new test `google-search.js`:
 ```
-const assert = require('assert');
+describe('Esri DevSummit Google Search', () => {
+    it('should display correct titles for the first three listings', () => {
 
-describe('webdriver.io page', () => {
-    it('should have the right title', () => {
-        browser.url('https://webdriver.io');
-        const title = browser.getTitle();
-        assert.strictEqual(title, 'WebdriverIO · Next-gen WebDriver test framework for Node.js');
     });
 });
 ```
+- Now let's do some setup.
+```
+it(...
+    const url = 'https://google.com';
+    const searchText = 'esri devsummit workshops';
+);
+```
 
-- run `./node_modules/.bin/wdio wdio.conf.js`
+- Just like in the last example, we'll use the `browser.url()` function to navigate the browser to the start URL. What we have so far:
+```
+const url = 'https://google.com';
+const searchText = 'esri devsummit workshops';
+
+browser.url(url);
+```
+
+- Time to run the project and see where we're at.
+  - `npm i`
+  - add a convenience script into `package.json`
+  ```
+  scripts: {
+    "test": "./node_modules/.bin/wdio wdio.conf.js"
+  }
+  ```
+  - `npm test`
+  - Result: we see a flash of `http://google.com`
+
+
+- What is the first step to searching Google? Answer: we want our test to enter the `searchText` we defined into Google's search field.
+  - WDIO needs a way to locate the elements we want to interact with. Solution: selectors.
+  - Open `http://google.com` in Google Chrome.
+  - Right click (ctrl + click on macs) the search field and select `Inspect Element`
+  - What distinctive features (CSS classes or HTML attributes) do you see?
+    - `input[title="Search"]`
+  - Define a registry of selector strings above the `describe` block (we anticipate that we will need more than just this one to complete the test):
+  ```
+  const SELECTORS = {
+    SEARCH_BAR: 'input[title="Search"]'
+  };
+
+  describe(...)
+  ```
+  - Add code to get a reference to the actual element:
+  ```
+  const url = 'https://google.com';
+  const searchText = 'esri devsummit workshops';
+
+  browser.url(url);
+
+  const searchBarEl = $(SELECTORS.SEARCH_BAR);
+  ```
+  - You may recognize the `$` selector function from JQuery syntax.
+  - Now, we need wait to make sure the search bar has loaded before we enter our search text:
+  ```
+  searchBarEl.waitForDisplayed();
+  ```
+
+  - How do we set the value of this element? Well, you know from developing for the web that you can just assign a value to the value property of an element, right? Let's try it:
+  ```
+  const searchBarEl = $(SELECTORS.SEARCH_BAR);
+  searchBarEl.waitForDisplayed();
+  searchBarEl.value = searchText;
+  ```
+
+  - `npm test`
+  - WHAT? An error? Why? It works in the browser! Key point -> the elements we interact with in Webdriver.IO _aren't real DOM elements_. They're abstractions defined by Webdriver.IO to make communication with the browser through the webdriver protocol simpler. So, we have to follow Webdriver.IO's API docs, not the stuff you find on MDN. Let's try again:
+
+  ```
+  const searchBarEl = $(SELECTORS.SEARCH_BAR);
+  searchBarEl.waitForDisplayed();
+  searchBarEl.setValue(searchText);
+  ```
+  - `npm test`
+
+
+
