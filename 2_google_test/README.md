@@ -80,7 +80,7 @@ browser.url(url);
   ```
 
   - `npm test`
-  - It didn't work? Why? Key point -> the elements we interact with in Webdriver.IO _aren't real DOM elements_. They're abstractions defined by Webdriver.IO to make communication with the browser through the webdriver protocol simpler. So, we have to follow Webdriver.IO's API docs, not the stuff you find on MDN. Let's try again:
+  - It didn't work? Why? Key point -> the elements we interact with in Webdriver.IO _aren't real DOM elements_. They're abstractions defined by Webdriver.IO to make communication with the browser through the webdriver protocol simpler. So, we have to follow Webdriver.IO's API docs, not the stuff you find on MDN. Let's try again using WDIO's [element.setValue()](https://webdriver.io/docs/api/element/setValue.html):
 
   ```javascript
   const searchBarEl = $(SELECTORS.SEARCH_BAR);
