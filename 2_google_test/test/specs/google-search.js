@@ -3,8 +3,8 @@ const assert = require('assert');
 const SELECTORS = {
     SEARCH_BAR: 'input[title="Search"]',
     SEARCH_BUTTON: 'input[value="Google Search"]',
-    ORGANIC_LISTING_LINKS: '#search .g a',
     ORGANIC_LISTING_HEADERS: '#search .g a h3',
+    ORGANIC_LISTING_LINKS: '#search .g a',
 };
 
 const KEYS = {
@@ -12,7 +12,7 @@ const KEYS = {
 };
 
 describe('Esri DevSummit Google Search', () => {
-    it('should display correct titles for the first three listings', () => {
+    it('results should have correct titles and url', () => {
         const url = 'https://google.com';
         const searchText = 'esri devsummit workshops';
 
