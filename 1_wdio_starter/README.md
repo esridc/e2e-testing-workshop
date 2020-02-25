@@ -3,7 +3,11 @@
 - JDK (https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 
 ## Set up Project
-- `npm init -y` - run in the directory you want your tests to live in
+- create a root directory named "e2e-testing-workshop" `mkdir e2e-testing-workshop`
+- navigate into that directory `cd e2e-testing-workshop`
+- create a subdirectory named "1_wdio_starter" `mkdir 1_wdio_starter`
+- navigate into that subdirectory `cd 1_wdio_starter`
+- `npm init -y`
 - `npm i --save-dev @wdio/cli`
 - `./node_modules/.bin/wdio config`
   - Where should your tests be launched? `local`
@@ -12,12 +16,12 @@
   - Do you want to run WebdriverIO commands synchronous or asynchronous? `sync`
   - Where are your test specs located? `Press Enter`
   - Which reporter do you want to use? `spec`
-  - Do you want to add a service to your test setup? `selenium-standalone` (this will allow us to run tests on multiple browsers instead of just Chrome)
+  - Do you want to add a service to your test setup? deselect `chromedriver`, select `selenium-standalone` (this will allow us to run tests on multiple browsers instead of just Chrome)
   - What is the base url? `Press Enter`
 - `mkdir -p ./test/specs`
 - `touch ./test/specs/basic.js`
 
-Insert the following:
+Insert the following into `./test/specs/basic.js`:
 ```
 const assert = require('assert');
 

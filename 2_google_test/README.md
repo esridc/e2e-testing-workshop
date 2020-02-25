@@ -1,8 +1,25 @@
 # Testing Google Search Results
 
 ## Setup
-- Same Webdriver.IO setup from last exercise.
-- Define a new test `google-search.js`:
+Same Webdriver.IO setup from last exercise:
+  - navigate to the root directory `e2e-testing-workshop`
+  - create a subdirectory named "2_google_test" `mkdir 2_google_test`
+  - navigate into that subdirectory `cd 2_google_test`
+  - `npm init -y`
+  - `npm i --save-dev @wdio/cli`
+  - `./node_modules/.bin/wdio config`
+    - Where should your tests be launched? `local`
+    - Where is your automation backend located? `On my local machine`
+    - Which framework do you want to use? `mocha`
+    - Do you want to run WebdriverIO commands synchronous or asynchronous? `sync`
+    - Where are your test specs located? `Press Enter`
+    - Which reporter do you want to use? `spec`
+    - Do you want to add a service to your test setup? deselect `chromedriver`, select `selenium-standalone` (this will allow us to run tests on multiple browsers instead of just Chrome)
+    - What is the base url? `Press Enter`
+  - `mkdir -p ./test/specs`
+
+- Define a new test `touch ./test/specs/google-search.js`
+- Insert the following into `./test/specs/google-search.js`:
 ```javascript
 const assert = require('assert');
 
@@ -12,7 +29,7 @@ describe('Esri DevSummit Google Search', () => {
     });
 });
 ```
-- Now let's define some constants.
+- Now let's define some constants in the `it()` bock.
 ```javascript
 // it(...
     const url = 'https://google.com';
@@ -28,16 +45,16 @@ const searchText = 'esri devsummit workshops';
 browser.url(url);
 ```
 
-- Time to run the project and see where we're at.
+Time to run the project and see where we're at.
   - `npm i`
   - add a convenience script into `package.json`
   ```json
-  scripts: {
+  "scripts": {
     "test": "./node_modules/.bin/wdio wdio.conf.js"
   }
   ```
   - `npm test`
-  - Result: we see a flash of `http://google.com`
+  - Result: we see a flash of `http://google.com` and a passed test result in our terminal
 
 
 ## Entering Text into Search Bar
@@ -116,7 +133,13 @@ browser.keys(KEYS.ENTER); // "Press" enter to search
 
 ## Examine the listing titles
 - Need a selector for the listings. We want to examine the titles of the top three, so we need one that will suffice for all the listings.
-- `#search .g a h3`
+  - Add selector:
+  ```javascript
+    SELECTORS = {
+      ...
+      ORGANIC_LISTING_HEADERS: '#search .g a h3',
+    }
+  ```
 - Need to get the text from each h3 element.
 - `const listingHeaderTexts = $$(SELECTORS.ORGANIC_LISTING_HEADERS).map(el => el.getText());`
 - Notice the use of `$$` to select multiple elements whereas `$` would have selected only the first.
