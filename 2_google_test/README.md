@@ -29,7 +29,7 @@ describe('Esri DevSummit Google Search', () => {
     });
 });
 ```
-- Now let's define some constants in the `it()` bock.
+- Now let's define some constants in the `it()` block.
 ```javascript
 // it(...
     const url = 'https://google.com';
