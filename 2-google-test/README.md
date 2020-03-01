@@ -33,14 +33,14 @@ describe('Esri DevSummit Google Search', () => {
 ```javascript
 // it(...
     const url = 'https://google.com';
-    const searchText = 'esri devsummit workshops';
+    const searchText = 'esri devsummit 2020';
 // );
 ```
 
 - Just like in the last example, we'll use the `browser.url()` function to navigate the browser to the start URL. What we have so far:
 ```javascript
 const url = 'https://google.com';
-const searchText = 'esri devsummit workshops';
+const searchText = 'esri devsummit 2020';
 
 browser.url(url);
 ```
@@ -76,7 +76,7 @@ Time to run the project and see where we're at.
   - Add code to get a reference to the actual element:
   ```javascript
   const url = 'https://google.com';
-  const searchText = 'esri devsummit workshops';
+  const searchText = 'esri devsummit 2020';
 
   browser.url(url);
 
@@ -187,7 +187,7 @@ const KEYS = {
 describe('Esri DevSummit Google Search', () => {
     it('results should have correct titles and url', () => {
         const url = 'https://google.com';
-        const searchText = 'esri devsummit workshops';
+        const searchText = 'esri devsummit 2020';
 
         browser.url(url);
 
