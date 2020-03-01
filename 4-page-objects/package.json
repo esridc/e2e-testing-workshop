@@ -1,5 +1,5 @@
 {
-  "name": "1_wdio_starter",
+  "name": "@e2e-workshop/4-page-objects",
   "version": "1.0.0",
   "description": "## Prerequisites - Node.JS at least v8.11.2 or higher (I used v8.16.0) - JDK (https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)",
   "main": "index.js",

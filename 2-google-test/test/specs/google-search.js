@@ -14,7 +14,7 @@ const KEYS = {
 describe('Esri DevSummit Google Search', () => {
     it('results should have correct titles and url', () => {
         const url = 'https://google.com';
-        const searchText = 'esri devsummit workshops';
+        const searchText = 'esri devsummit 2020';
 
         browser.url(url);
 
@@ -33,5 +33,7 @@ describe('Esri DevSummit Google Search', () => {
         firstListingHeaderLink.click();
 
         assert.equal(browser.getUrl(), 'https://www.esri.com/en-us/about/events/devsummit/agenda/pre-summit-hands-on-training', 'Dev summit training page has correct URL');
+
+        // find the course
     });
 });

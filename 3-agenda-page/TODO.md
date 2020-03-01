@@ -1,0 +1,6 @@
+- on agenda page, start by selecting `.main-content:nth-child(6)` which is the course
+- problem is this is a very brittle selector!
+  - if the sort is different, we have a different course
+- better... webdriver power selection tools
+  - const header = $('h3=End-to-End Testing*')
+- best - use data-test attributes that are stripped in production builds

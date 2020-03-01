@@ -1,10 +1,10 @@
 {
-  "name": "1_wdio_starter",
+  "name": "@e2e-workshop/3-agenda-page",
   "version": "1.0.0",
   "description": "## Prerequisites - Node.JS at least v8.11.2 or higher (I used v8.16.0) - JDK (https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/wdio wdio.conf.js"
   },
   "keywords": [],
   "author": "",
