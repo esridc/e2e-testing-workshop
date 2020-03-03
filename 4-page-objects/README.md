@@ -105,6 +105,21 @@ export default {
 };
 ```
 
+and import that into the `google.page.js` file
+
+```js
+...
+import KEYS from '../utils/keys';
+...
+// then use it in execute search
+executeSearch(searchText) {
+  this.searchBar.waitForDisplayed();
+  this.searchBar.setValue(searchText);
+  browser.keys(KEYS.ENTER); // "Press" enter to search
+}
+
+```
+
 ### Overview Page
 
 ```js
