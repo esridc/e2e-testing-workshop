@@ -1,5 +1,7 @@
 const assert = require('assert');
 import GoogleSearchPage from '../pages/google.page';
+import OverviewPage from '../pages/overview.page';
+import WorkshopsPage from '../pages/workshops.page';
 
 
 describe('Esri DevSummit Google Search', () => {
@@ -17,7 +19,12 @@ describe('Esri DevSummit Google Search', () => {
     assert.equal(listingHeaderTexts[2], 'Call for Presentations | 2020 DevSummit, Palm Spring ... - Esri', 'Third listing has correct title');
 
     GoogleSearchPage.clickFirstResult();
-
-    assert.equal(browser.getUrl(), 'https://www.esri.com/en-us/about/events/devsummit/overview', 'Dev Summit Overview');
+    // Use the Overview page to verify that we ended up in the right place
+    OverviewPage.verifyUrl(assert);
+    // now use it's selectors to navigate
+    OverviewPage.openAgenda();
+    // now verify we are on the workshops page
+    WorkshopsPage.verifyUrl(assert);
+    assert.equal(WorkshopsPage.getSessionTitle(6), 'End-to-End Testing for Javascript Applications [ONE DAY]');
   });
 });

@@ -11,7 +11,7 @@ const AGENDA = {
   AGENDA_DROP_DOWN: 'li.es-nav-subitem:nth-child(2) > a',
   WORKSHOP_LINK: 'li.es-nav-subitem:nth-child(2) > div > ul > li:nth-child(3) > a',
   SESSION_ENTRY: '.event-detail:nth-child(6)',
-  SESSION_NEXT_ENTRY: '.event-detail:nth-child(7)',
+  FOOTER: '#globalfooter',
   SESSION_ENTRY_TITLE: '.event-detail:nth-child(6) h3'
 }
 

@@ -15,33 +15,11 @@ export default class BasePage {
   }
 
   /**
-   * Simplify Assertions about Url
-   * @param {string} expectedUrl THe Url we expect
-   * @param {function} expect the expect function
+   * Verify the url is what we expect
+   * @param {function} assert Assert function
    */
-  expectUrlToBe (expectedUrl, expect) {
+  verifyUrl (assert) {
     let currentUrl = browser.getUrl();
-    expect(currentUrl, `current url should be ${expectedUrl}`).to.equal(expectedUrl);
-  }
-
-  /**
-   * Waits for page to load
-   * @param {number} timeout - Amount of time to wait (default 5000 milliseconds)
-   * @param {string} pageName - Name of page
-   * @param {string} pageSelector - The selector to wait for
-   */
-  waitForLoad (timeout, pageName, pageSelector) {
-    $(pageSelector).waitForDisplayed(timeout,
-      false, `page: ${pageName} didn't load within ${timeout} ms`);
-  }
-
-  /**
-   * Waits for url to change
-   * @param {number} timeout - amount of time to wait (default 5000 milliseconds)
-   * @param {string} url - url to wait for
-   * @param {string} orgType - the type of organization
-   */
-  waitForUrl (timeout, url) {
-    browser.waitUntil(() => browser.getUrl() === url, timeout, `url: ${url} didn't load within ${timeout} ms`);
+    assert.equal(currentUrl, this.url, `current url should be ${this.url}`);
   }
 }
