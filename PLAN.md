@@ -68,7 +68,16 @@ BREAK: 10:15 - 10:30
 HANDS ON: 10:30 - 11:00 (30 min) 
 - class does the WebDriver 101
 
-**Dave:** Going Deeper & Page Model 101 11:00 - 11:30
+**Tate:** Digging into a Page 11:00 - 11:30
+- walk thru the 3rd exercise
+- main things here is digging into the dom, choosing selectors
+
+
+HANDS ON: Exercise 3 - 11:30 - 12:00
+
+Lunch: 12 - 1
+
+**Dave:** Adding Abstraction 1:00 - 1:30
 - locate the course entry
 - Look at the DOM - we see big set of `<div`'s uh-oh...
 - to get our course we'll need to use a n-th selector
@@ -82,12 +91,18 @@ HANDS ON: 10:30 - 11:00 (30 min)
   - present details on this...
 - Add simple page models to the 101
 
-HANDS ON: 11:30 - 12:00
+HANDS ON: 1:30 - 2:00
 - class does the Page Model exercise
 
-Lunch: 12 - 1
+**Tate** Workgin with Maps 2:00 - 2:30
+- walk thru
 
-Real-World E2E Projects 1:00 - 2:00 (Talk) Dave & Andew split
+BREAK: 2:30 - 3:00
+
+HANDS ON: Exercise #5 3:00-3:30
+
+
+Real-World E2E Projects 3:30 - 4:30 (Talk) Dave & Andew split
 - run test automatically if possible (CI)
 - on failure, give good messages
 - organize code to make specs easy to write and easy to debug
@@ -110,19 +125,6 @@ DEMO: Hub E2e Tour + Run
 - run a subset of tests just to watch it
 - Target 30 min
 
-HANDS ON:
-**TODO: Add details for what this is**
-- goals
-  - work with something that has data-test attrs
-  - do something w/ rest-js to verify state of something
-
-- **use the react react app from prev day workshop**
-  - dave to host
-- show how we've added `data-test` attrs to make things easier
-- use multiple pages
-- show how we use fixtures / well-known routes to items
-  - use rest-js to create an item, then search for it, verify props in ui, delete item
-
 Testing w/ AGO
 - oAuth patterns
    - pop-out oauth vs full-page transition flow
@@ -131,6 +133,3 @@ Testing w/ AGO
 Chicken & Egg Problem
 - how do you write e2e tests for code that's not yet deployed?
 - have a staging environment
-
-Wrap up:
-- ??
