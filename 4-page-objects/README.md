@@ -15,7 +15,7 @@ Part of the goal is to separate the "test logic" from the "page logic" so we wil
 
 ```
 $ mkdir tests/pages
-$ touch test/pages/google-search-page.js
+$ touch test/pages/google.page.js
 ```
 
 
@@ -24,7 +24,7 @@ We'll start by moving the Google selectors etc into a class
 
 
 ```js
-// tests/pages/google-search-page.js
+// tests/pages/google.page.js
 class GoogleSearchPage {
   constructor () {
     this.url = 'https://google.com';
@@ -53,7 +53,6 @@ class GoogleSearchPage {
   clickFirstResult () {
     return this.listingLinks.click();
   }
-
 }
 // export an instance
 export default new GoogleSearchPage();
@@ -65,24 +64,24 @@ Then create the `tests/specs/google-search.spec.js` file, and can import the pag
 
 ```js
 const assert = require('assert');
-import Google from '../pages/google.page';
+import GoogleSearchPage from '../pages/google.page';
 
 
 describe('Esri DevSummit Google Search', () => {
   it('results should have correct titles and url', () => {
-
-    Google.open()
+    
+    GoogleSearchPage.open()
     // we've abstracted out all the selectors here
     // so another spec could reuse the google.page
-    Google.executeSearch('esri devsummit workshops')
+    GoogleSearchPage.executeSearch('esri devsummit 2020')
 
-    const listingHeaderTexts = Google.getListingHeaders();
+    const listingHeaderTexts = GoogleSearchPage.getListingHeaders();
 
     assert.equal(listingHeaderTexts[0], '2020 Esri Developer Summit: March 10-13 in Palm Springs, CA', 'First listing has correct title');
     assert.equal(listingHeaderTexts[1], 'Agenda | 2020 Esri Developer Summit', 'Second listing has correct title');
     assert.equal(listingHeaderTexts[2], 'Call for Presentations | 2020 DevSummit, Palm Spring ... - Esri', 'Third listing has correct title');
 
-    Google.clickFirstResult();
+    GoogleSearchPage.clickFirstResult();
 
     assert.equal(browser.getUrl(), 'https://www.esri.com/en-us/about/events/devsummit/overview', 'Dev Summit Overview');
   });
@@ -163,7 +162,7 @@ class WorkshopsPage {
   get navAgendaDropDown () { return $('li.es-nav-subitem:nth-child(2) > a'); }
   get navWorkshopLink () { return $('li.es-nav-subitem:nth-child(2) > div > ul > li:nth-child(3) > a'); }
 
-  get globalFooter () { return $$('#globalfooter'); }
+  get globalFooter () { return $('#globalfooter'); }
   get listingLinks () { return $('.event-detail:nth-child(6) h3'); }
   // abstract more details from spec
   verifyUrl (assert) {
@@ -345,9 +344,8 @@ class DevSummitNav {
 export default new DevSummitNav();
 ```
 
-In addition to the selectors, we've added some helpers - again the idea being to allow us to keep the details abstracted from the spec itself.
 
-Now we integrate this into the two Pages and update the spec
+
 
 ### Overview Page updated with DevSummitNav Component
 
@@ -417,6 +415,8 @@ export default new WorkshopsPage();
 ```
 
 ### Update our spec
+
+Now we integrate this into the two Pages and update the spec
 
 ```js
 const assert = require('assert');
