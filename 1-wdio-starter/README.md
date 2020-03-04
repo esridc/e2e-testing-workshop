@@ -5,8 +5,8 @@
 ## Set up Project
 - create a root directory named "e2e-testing-workshop" `mkdir e2e-testing-workshop`
 - navigate into that directory `cd e2e-testing-workshop`
-- create a subdirectory named "1_wdio_starter" `mkdir 1_wdio_starter`
-- navigate into that subdirectory `cd 1_wdio_starter`
+- create a subdirectory named "1-wdio-starter" `mkdir 1-wdio-starter`
+- navigate into that subdirectory `cd 1-wdio-starter`
 - `npm init -y`
 - `npm i --save-dev @wdio/cli`
 - `./node_modules/.bin/wdio config`
