@@ -11,7 +11,7 @@ We are going to be refactoring the previous state of things, so you can keep wor
 
 ## Create a `pages` folder
 
-Part of the goal is to separate the "test logic" from the "page logic" so we will create a `tests/pages` folder to hold our page objects, and `touch` a new file to create it. You could also created the file in your editor.
+Part of the goal is to separate the "test logic" from the "page logic" so we will create a `tests/pages` folder to hold our page objects, and `touch` a new file to create it. You could also create the file in your editor.
 
 ```
 $ mkdir tests/pages
@@ -29,7 +29,7 @@ class GoogleSearchPage {
   constructor () {
     this.url = 'https://google.com';
   }
-  
+
   open() {
     browser.url(this.url);
   }
@@ -70,7 +70,7 @@ import Google from '../pages/google.page';
 
 describe('Esri DevSummit Google Search', () => {
   it('results should have correct titles and url', () => {
-    
+
     Google.open()
     // we've abstracted out all the selectors here
     // so another spec could reuse the google.page
@@ -127,7 +127,7 @@ class OverviewPage {
   constructor () {
     this.url = 'https://www.esri.com/en-us/about/events/devsummit/overview';
   }
-  
+
   open() {
     browser.url(this.url);
   }
@@ -154,7 +154,7 @@ class WorkshopsPage {
   constructor () {
     this.url = 'https://www.esri.com/en-us/about/events/devsummit/agenda/pre-summit-hands-on-training';
   }
-  
+
   open() {
     browser.url(this.url);
   }
@@ -314,7 +314,7 @@ class DevSummitNav {
   // Open the drop-down
   openDropdown (name) {
     switch (name) {
-      case 'overview': 
+      case 'overview':
         this.navOverviewLink.click();
         break;
       case 'agenda':
@@ -325,7 +325,7 @@ class DevSummitNav {
   // Click links
   clickLink (name) {
     switch (name) {
-      case 'overview': 
+      case 'overview':
         this.navOverviewLink.click();
         break;
       case 'agenda:agenda':
@@ -359,7 +359,7 @@ class OverviewPage extends BasePage{
     super();
     this.url = 'https://www.esri.com/en-us/about/events/devsummit/overview';
   }
-  
+
   open() {
     browser.url(this.url);
   }
@@ -386,7 +386,7 @@ class WorkshopsPage extends BasePage {
     super();
     this.url = 'https://www.esri.com/en-us/about/events/devsummit/agenda/pre-summit-hands-on-training';
   }
-  
+
   open() {
     browser.url(this.url);
   }
@@ -409,7 +409,7 @@ class WorkshopsPage extends BasePage {
     const targetEl = $(`.event-detail:nth-child(${entryNumber}) h3`);
     targetEl.waitForClickable({timeout:2000});
     return targetEl.getText();
-  } 
+  }
 
 }
 // export an instance
@@ -427,7 +427,7 @@ import WorkshopsPage from '../pages/workshops.page';
 
 describe('Esri DevSummit Google Search', () => {
   it('results should have correct titles and url', () => {
-    
+
     GoogleSearchPage.open()
     // we've abstracted out all the selectors here
     // so another spec could reuse the google.page
