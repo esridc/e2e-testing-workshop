@@ -10,18 +10,18 @@ The workshop introduces the concept of end-to-end testing, discusses how it fits
 
 ## Exercises
 
-### [Webdriver Starter](./1_wdio_starter/README.md)
+### [Hello World](./1-wdio-starter/README.md)
 
-add desc
+In this exercise we will get Webdriver setup and running.
 
-### [A Google Search](./2_google_test/README.md)
+### [WebDriver 101](./2-google-test/README.md)
 
-add desc
+Using the structure of the first exercise, we build out knowledge by executing a google search, and following a link.
 
-### [Digging into a Page](./3_/README.md)
+### [Digging into a Page](./3-agenda-page/README.md)
 
-add desc
+Continuing on, we explore deep selectors, more navigation and validation
 
-### [Adding Abstractions](./4-page-model/README.md)
+### [Adding Abstractions](./4-page-objects/README.md)
 
-In this exercise, we refactor the previous work to utilize the Page Model. We introduce a base-page class, a component, and two Page classes.
+At this point we've got one spec file that has a lot of selectors, page orchestration and assertions all in a jumble of code. If we needed to expand this to cover more of the DevSummit site, we'd be in for a world of hurt. Thus, it's time to introduce some abstractions, via the [Page Object Pattern](https://webdriver.io/docs/pageobjects.html)
