@@ -1,6 +1,6 @@
 # Testing Maps
 
-## This is Esri after all, so how do we go about testing maps?
+## This _is_ Esri, after all.
 
 While the setup we've used to this point is ideal for flexing user interfaces composed of HTML elements, take a look at [this example map app](https://developers.arcgis.com/javascript/latest/sample-code/featurereduction-cluster-filter/live/index.html).
 
@@ -138,7 +138,7 @@ Let's open `map-screen-SOME_WIDHTxSOME_HEIGHT.png`.
 
 ![Original baseline before map is loaded](./images/baseline-pre-map-load.png "Original baseline image")
 
-Uh oh. Looks like our test took a screenshot before the map had fully loaded and the sidebar had been populated with the results of asynchronous tests.
+Uh oh. Looks like our test took a screenshot before the map had fully loaded and the sidebar had been populated with the results of asynchronous network calls.
 
 ## Fine-tuning the Baseline Image
 
@@ -159,7 +159,7 @@ it('should look correct on page load', () => {
 });
 ```
 
-> WARNING: Using `browser.pause` to add an arbitrary wait made sense for a contrived workshop example, but it should be avoided in production. Instead, find ways to make the wait more deterministic. For example, your app could add a tiny, invisible, uniquely-identifiable element somewhere on the page when the map is totally loaded as a signal to your test that it's time to take that screenshot.
+> WARNING: Using `browser.pause` to add an arbitrary wait made sense for a contrived workshop example, but **it should be avoided in production.** Instead, find ways to make the wait more deterministic. For example, your app could add a tiny, invisible, uniquely-identifiable element somewhere on the page when the map is totally loaded as a signal to your test that it's time to take that screenshot.
 
 Let's run it again (it will fail).
 ```
@@ -172,3 +172,55 @@ The test is now failing because it is comparing the now-accurate current screens
 
 **To fix this problem**, delete the current baseline image in `test/baselineImages` and run the test again. The updated screenshot will now be used as the baseline and the test will pass.
 
+## Testing Map's Response to Interaction
+As the final piece in this tutorial, we will have our test automate a user interaction with the sidebar and verify that the map changes how we expect it to.
+
+Specifically, we'll add a new test to load the page, change the selected religion to "Sikh", and verify that the map looks right.
+
+Under the first `it` block, add another like so:
+
+```javascript
+it('Sikh clusters should look correct', () => {
+  const url = 'https://developers.arcgis.com/javascript/latest/sample-code/featurereduction-cluster-filter/live/index.html';
+  browser.url(url);
+
+  browser.pause(4000); // wait for map to load. DON'T rely on this in production
+});
+```
+
+Now, we'll add code to select the `Sikh` option from the religions list.
+
+```javascript
+const SELECTORS = { // NEW
+  SIKH_OPTION: 'option[value="Sikh"]'
+};
+...
+it('Sikh clusters should look correct', () => {
+  const url = 'https://developers.arcgis.com/javascript/latest/sample-code/featurereduction-cluster-filter/live/index.html';
+  browser.url(url);
+
+  browser.pause(4000); // wait for map to load. DON'T rely on this in production
+
+  $(SELECTORS.SIKH_OPTION).click(); // NEW
+});
+```
+
+And finally. we'll add a visual assertion, using the string `'map-screen-sikh'` as the key for this unique visual assertion.
+
+```javascript
+it('Sikh clusters should look correct', () => {
+  const url = 'https://developers.arcgis.com/javascript/latest/sample-code/featurereduction-cluster-filter/live/index.html';
+  browser.url(url);
+
+  browser.pause(4000); // wait for map to load. DON'T rely on this in production
+
+  $(SELECTORS.SIKH_OPTION).click(); // NEW
+  assert.equal(browser.checkScreen('map-screen-sikh'), 0); // NEW
+});
+```
+
+Finally, run the tests. We've now verified the map both in its initial state, and after user interaction.
+
+```
+$ npm test
+```
