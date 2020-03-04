@@ -15,11 +15,12 @@ export default class BasePage {
   }
 
   /**
-   * Verify the url is what we expect
+   * Verify the url is what we
    * @param {function} assert Assert function
    */
   verifyUrl (assert) {
     let currentUrl = browser.getUrl();
     assert.equal(currentUrl, this.url, `current url should be ${this.url}`);
   }
+
 }
