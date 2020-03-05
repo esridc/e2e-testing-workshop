@@ -1,6 +1,6 @@
 # Page Objects
 
-At this point we've covered a lot of ground in terms of working with Webdriver, but we've piled all the code into one spec, and that is clearly not going to scale up or be maintainable. So it's time to bring some struture to our test project.
+At this point we've covered a lot of ground in terms of working with Webdriver, but we've piled all the code into one spec, and that is clearly not going to scale up or be maintainable. So it's time to bring some structure to our test project.
 
 The first thing we will do is leverage the [Page Object Pattern](https://webdriver.io/docs/pageobjects.html) to separate things out a bit. From the documentation...
 
@@ -60,7 +60,7 @@ export default new GoogleSearchPage();
 ```
 
 
-Then create the `tests/specs/google-search.spec.js` file, and can import the page and greatly streamline things
+Then create the `tests/specs/google-search.spec.js` file. You can see that importing and using the page greatly streamlines things.
 
 ```js
 const assert = require('assert');
@@ -92,7 +92,7 @@ We have 2 other pages, so let's do the same sort of abstraction for them:
 - create `test/pages/overview.page.js`
 - create `test/pages/workshops.page.js`
 
-And while we're at it, lets create a util for the KEYS so that's less aweful
+And while we're at it, lets create a util for the KEYS so that it's less awful
 
 create `test/utils/keys.js`
 
@@ -277,7 +277,7 @@ export default class BasePage {
 }
 ```
 
-We need to update the other page's to import the BasePage and extend from it. This is the pattern to apply to all three page files
+We need to update the other pages to import the BasePage and extend from it. This is the pattern to apply to all three page files
 
 ```js
 import BasePage from './base-page';

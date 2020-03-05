@@ -100,7 +100,7 @@ What is the first step to searching Google? Answer: we want our test to enter th
   const searchBarEl = $(SELECTORS.SEARCH_BAR);
   // };
   ```
-  
+
   - You may recognize the `$` selector function from JQuery syntax... it's like that but with more super powers.
 
   - Now, we need wait to make sure the search bar has loaded before we enter our search text:
@@ -110,7 +110,7 @@ What is the first step to searching Google? Answer: we want our test to enter th
   ```
 
 ### Setting the Value
-  
+
   How do we set the value of this element? Well, you know from developing for the web that you can just assign a string to the value property of an element, right? Let's try it:
 
   ```javascript
@@ -159,7 +159,7 @@ const KEYS = {
 browser.keys(KEYS.ENTER); // "Press" enter to search
 ```
 
-- `npm test` 
+- `npm test`
 - we should see a search results listing just before chrome closes.
 
 
@@ -238,7 +238,7 @@ describe('Esri DevSummit Google Search', () => {
 
     const listingHeaderTexts = $$(SELECTORS.ORGANIC_LISTING_HEADERS).map(el => el.getText());
 
-    // Note: The exact order of these results may vary 
+    // Note: The exact order of these results may vary
     // This exercise is meant to show the use of webdriver selectors vs testing consistent
     // result ordering by Google
     assert.equal(listingHeaderTexts[0], '2020 Esri Developer Summit: March 10-13 in Palm Springs, CA', 'First ok');

@@ -13,11 +13,11 @@ The DevSummit homepage has a navigation bar, and we need to locate the `Agenda` 
 
 ![Overview Navigation](./images/overview-menu.png)
 
-To suprisingly, the DOM is somewhat complicated - the link we want to click is shown below
+Suprisingly, the DOM is somewhat complicated - the link we want to click is shown below.
 
 ![Overview Navigation](./images/overview-nav-dom.png)
 
-What's more, that element is not even visible, until we click on the `Agenda` - so this will be a two step process. 
+What's more, that element is not even visible, until we click on the `Agenda` - so this will be a two step process.
 
 1) locate and click the Agenda link
 2) locate and click the Workshops link
@@ -27,15 +27,15 @@ Given the DOM structure, it's pretty clear that these are going to be messy sele
 
 `#secondary-nav > div.es-nav-menu > div > ul > li:nth-child(2) > a`
 
-While that will work, typically we try to use the simplest-selector-that-reliably-works. And it turnd out we can slim this down to
+While that will work, typically we try to use the simplest-selector-that-reliably-works. And it turns out we can slim this down to
 
 `li.es-nav-subitem:nth-child(2) > a`
 
 Which is literally, select the `a` inside the second `li` that has class `es-nav-subitem`.
 
-Next, the workshop link... again the full selector is aweful
+Next, the workshop link... again the full selector is awful
 
-`#secondary-nav > div.es-nav-menu > div > ul > li:nth-child(2) > div > ul > li:nth-child(3) > a``
+`#secondary-nav > div.es-nav-menu > div > ul > li:nth-child(2) > div > ul > li:nth-child(3) > a`
 
 and we can slim it up a little to `li.es-nav-subitem:nth-child(2) > div > ul > li:nth-child(3) > a`
 
@@ -50,7 +50,7 @@ const AGENDA = {
 // describe(...
 ```
 
-It should be said that these are very brittle selectors. If the nav was refactored, or moved in the page dom structure, these would likely break. 
+It should be said that these are very brittle selectors. If the nav was refactored, or moved in the page dom structure, these would likely break.
 
 ### Resilient Selectors
 
@@ -62,13 +62,13 @@ If you know your app's ui is undergoing changes, then the most robust solution i
 </li>
 ```
 
-Then you can use a selector like `a[data-test="subnav-workshop"]`, and no matter where the nav is in the page DOM, that link will be found. Unforuntately we can't edit this site, so we have to use the deep selectors.
+Then you can use a selector like `a[data-test="subnav-workshop"]`, and no matter where the nav is in the page DOM, that link will be found. Unfortunately we can't edit this site, so we have to use the deep selectors.
 
 ### Linking to the Workshops Page
 
 Back in our test, we need to click the drop-down to open the sub-nav, then click the link.
 
-We do this with two `.click()` calls, and then we add an assertion that we ended up on the righ page
+We do this with two `.click()` calls, and then we add an assertion that we ended up on the right page
 
 ```js
  // click the agenda on nav bar to open it
@@ -84,15 +84,15 @@ We do this with two `.click()` calls, and then we add an assertion that we ended
 
 Let's open the target page in our browser https://www.esri.com/en-us/about/events/devsummit/agenda/pre-summit-hands-on-training.
 
-When we load up the session page, we see that the designer have gotten creative and the sessions fade in as we scroll down the page. Something tells me this is going to make things interesting.
+When we load up the session page, we see that the designers have gotten creative and the sessions fade in as we scroll down the page. Something tells me this is going to make things interesting.
 
-### Locating the Session 
+### Locating the Session
 
 Again, we right click on the "End-to-End Testing..." header in the dom, and inspect it.
 
 Copying the selector gives us `#main-content > div:nth-child(6) > div > div > div.event-detail-registration_heading.lighttheme > h3`
 
-Ouch. That'll work, but we can slim it down a little - we know it's the 6th element with class `.event-detail` so lets add  `.event-detail:nth-child(6) h3` to the `AGENDA` hash. 
+Ouch. That'll work, but we can slim it down a little - we know it's the 6th element with class `.event-detail` so lets add  `.event-detail:nth-child(6) h3` to the `AGENDA` hash.
 
 ```js
 const AGENDA = {
@@ -149,7 +149,7 @@ $('.event-detail:nth-child(6) h3').getText()
 
 ![Selector returns empty string](./images/empty-string.png)
 
-Weird. Let's scroll down the page and see if the element is in the DOM. 
+Weird. Let's scroll down the page and see if the element is in the DOM.
 
 Now try that same command...
 
@@ -227,7 +227,7 @@ describe('Esri DevSummit Google Search', () => {
     firstListingHeaderLink.click();
 
     assert.equal(browser.getUrl(), 'https://www.esri.com/en-us/about/events/devsummit/overview', 'Dev Summit page');
-    
+
     // click the agenda on nav bar to open it
     $(AGENDA.AGENDA_DROP_DOWN).click();
     // now click the workshop link

@@ -6,7 +6,7 @@ While the setup we've used to this point is ideal for flexing user interfaces co
 
 We have some user interface elements in a floating sidebar on the right and the zoom buttons at the top left of the screen. We can find selectors for these elements and, using our new-found testing skills, write tests to click buttons and change the active dropdown menu option.
 
-But what about that map itself? Inspecting it informs us that it's actually a single canvas element upon which the map is being drawn. This makes it very difficult to click specific areas _within_ the map because you can't reference _canvas_ elements with HTML selectors.
+But what about that map itself? Inspecting it informs us that it's actually a single canvas element upon which the map is being drawn. This makes it very difficult to interact with specific areas _within_ the map because you can't reference _canvas_ elements with HTML selectors.
 
 A potential solution: *visual testing.*
 
